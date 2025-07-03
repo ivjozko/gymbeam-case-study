@@ -25,7 +25,7 @@ Pole `category_id` je zahrnuté priamo vo faktovej tabuľke `fact_sales` kvôli 
 
 ![Star Schema Diagram](./star_schema.png)
 
-## 🔑 Kľúče, normalizácia a denormalizácia
+##  Kľúče, normalizácia a denormalizácia
 
 ### a. Primárne a cudzie kľúče
 
@@ -69,3 +69,10 @@ Pole `category_id` je zahrnuté priamo vo faktovej tabuľke `fact_sales` kvôli 
 - Voliteľne by sa dali denormalizovať aj ďalšie často dotazované údaje, napr.:
   - `region` zo `dim_customer`
   - `year`, `month` z `dim_date` (kvôli rýchlemu filtrovania podľa času)
+
+ ## SQL schéma
+
+Kompletný SQL skript na vytvorenie databázy (operačný aj analytický model) nájdete tu:
+
+ [create_schema.sql](./create_schema.sql)
+
