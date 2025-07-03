@@ -24,7 +24,7 @@ Skript generuje CSV súbor s týmito stĺpcami:
 | `longitude`    | Zemepisná dĺžka                    |
 | `opening_hours`| Otváracie hodiny (iba bežné časy)  |
 
-> 📝 **Poznámka k atribútu `region`:**  
+> **Poznámka k atribútu `region`:**  
 > API Golemio priamo neposkytuje informáciu o regióne pre jednotlivé knižnice.  
 > Tento údaj by bolo možné **odvodiť manuálne**, napríklad na základe názvu mesta alebo mestskej časti (`city`) – napr. `"Praha 4"` by sa dalo priradiť k `"Hlavní město Praha"`.  
 >  
@@ -43,7 +43,7 @@ Mon 13:00–17:00 | Tue 16:00–20:00 | Wed 15:00–17:00
 
 ---
 
-## ▶️ Spustenie
+## Spustenie
 
 1. Získaj **API token** z [https://api.golemio.cz/api-keys/dashboard](https://api.golemio.cz/api-keys/dashboard)
 2. Vlož token do premennej `API_TOKEN` v skripte
@@ -52,24 +52,40 @@ Mon 13:00–17:00 | Tue 16:00–20:00 | Wed 15:00–17:00
 [Zobraziť zdrojový kód skriptu (golemio_extractor.py)](./golemio_extractor.py)
 
 
-## Automatizácia spúšťania (Windows 10)
-Skript je možné spúšťať automaticky každý deň o 07:00 pomocou Task Scheduler:
+## Automatizácia spúšťania
 
-Otvor Task Scheduler (Plánovač úloh)
+Tento skript je možné spúšťať automaticky každý deň o 07:00, aby boli údaje vždy aktuálne.
 
-Vytvor novú úlohu: "Create Basic Task..."
+###  Windows (Task Scheduler)
 
-Frekvencia: Daily, čas: 07:00
+1. Otvorte **Task Scheduler** (Plánovač úloh)
+2. Kliknite na **"Create Basic Task..."**
+3. Názov: `Golemio Library Updater`
+4. Frekvencia: **Daily**, čas: **07:00**
+5. Akcia: **"Start a program"**
+   - **Program/script:** `python`
+   - **Add arguments:** `C:\cesta\k\tvojmu\golemio_extractor.py`
+6. Potvrďte
 
-Akcia: Start a program
+> Uistite sa, že Python je pridaný do PATH. Ak nie je, zadajte plnú cestu k `python.exe`.
 
-Program/script: python
+---
 
-Add arguments: C:\cesta\k\tvojmu\golemio_extractor.py
+### macOS / Linux (cron)
 
-Potvrď a hotovo
+Spustite terminál a napíšte:
 
-✅ Python musí byť v PATH, alebo zadaj plnú cestu k python.exe
+```bash
+crontab -e
+```
+
+Pridajte nasledovný riadok:
+```bash
+0 7 * * * /usr/bin/python3 /absolutna/cesta/k/golemio_extractor.py
+```
+Tento príkaz zabezpečí, že sa skript spustí každý deň o 07:00 ráno.
+
+Overte si cestu k Pythonu cez which python3
 
 
 ## Súbory v priečinku:
