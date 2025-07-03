@@ -34,15 +34,14 @@ Mon 13:00–17:00 | Tue 16:00–20:00 | Wed 15:00–17:00
 
 ## ▶️ Spustenie
 
-1. Získaj **API token** z [https://www.golemio.cz/api-key](https://www.golemio.cz/api-key)
+1. Získaj **API token** z [https://api.golemio.cz/api-keys/dashboard](https://api.golemio.cz/api-keys/dashboard)
 2. Vlož token do premennej `API_TOKEN` v skripte
 3. Spusti skript:
 
-```bash
-python golemio_extractor.py
-```
+[Zobraziť zdrojový kód skriptu (golemio_extractor.py)](./golemio_extractor.py)
 
-Automatizácia spúšťania (Windows 10)
+
+## Automatizácia spúšťania (Windows 10)
 Skript je možné spúšťať automaticky každý deň o 07:00 pomocou Task Scheduler:
 
 Otvor Task Scheduler (Plánovač úloh)
@@ -62,7 +61,7 @@ Potvrď a hotovo
 ✅ Python musí byť v PATH, alebo zadaj plnú cestu k python.exe
 
 
-Súbory v priečinku:
+## Súbory v priečinku:
 golemio_extractor.py – hlavný extraktor
 
 golemio_libraries.csv – výstupný súbor
