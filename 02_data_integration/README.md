@@ -1,6 +1,6 @@
 # Úloha 2 – Golemio API extraktor (mestské knižnice)
 
-Tento skript `golemio_extractor.py` sťahuje dáta z otvoreného API Golemio a ukladá ich do CSV súboru `golemio_libraries.csv`.
+Tento skript [golemio_extractor.py](./golemio_extractor.py) sťahuje dáta z otvoreného API Golemio a ukladá ich do CSV súboru [golemio_libraries.csv)](./golemio_libraries.csv).
 
 ## Použité technológie:
 - Jazyk: **Python 3**
@@ -23,6 +23,17 @@ Skript generuje CSV súbor s týmito stĺpcami:
 | `latitude`     | Zemepisná šírka                    |
 | `longitude`    | Zemepisná dĺžka                    |
 | `opening_hours`| Otváracie hodiny (iba bežné časy)  |
+
+> 📝 **Poznámka k atribútu `region`:**  
+> API Golemio priamo neposkytuje informáciu o regióne pre jednotlivé knižnice.  
+> Tento údaj by bolo možné **odvodiť manuálne**, napríklad na základe názvu mesta alebo mestskej časti (`city`) – napr. `"Praha 4"` by sa dalo priradiť k `"Hlavní město Praha"`.  
+>  
+> Takéto riešenie by si však vyžadovalo:
+> - vytvorenie vlastného mapovania všetkých miest / obvodov na príslušné kraje
+> - externý dataset a dodatočné spracovanie údajov  
+>  
+> Z dôvodu rozsahu a zámeru zadania (ktoré nevyžaduje obohatenie údajov) sme sa rozhodli ponechať pole `region` prázdne a túto možnosť len odporučiť ako rozšírenie do budúcnosti.
+
 
 ### Formát otváracích hodín:
 Mon 13:00–17:00 | Tue 16:00–20:00 | Wed 15:00–17:00
