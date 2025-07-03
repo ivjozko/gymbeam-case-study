@@ -1,6 +1,6 @@
 # Úloha 2 – Golemio API extraktor (mestské knižnice)
 
-Tento skript [golemio_extractor.py](./golemio_extractor.py) sťahuje dáta z otvoreného API Golemio a ukladá ich do CSV súboru [golemio_libraries.csv)](./golemio_libraries.csv).
+Tento skript [golemio_extractor.py](./golemio_extractor.py) sťahuje dáta z otvoreného API Golemio a ukladá ich do CSV súboru [golemio_libraries.csv](./golemio_libraries.csv).
 
 ## Použité technológie:
 - Jazyk: **Python 3**
