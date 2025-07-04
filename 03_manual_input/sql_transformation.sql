@@ -1,3 +1,8 @@
+-- SQL Transformácia z Keboola: čistenie tabuľky csv_input
+-- Autor: Jozef Ivančo
+-- Dátum: júl 2025
+
+
 -- Vytvorenie očistenej tabuľky s validovanými a skontrolovanými dátami
 CREATE OR REPLACE TABLE clean_csv_input AS
 SELECT
