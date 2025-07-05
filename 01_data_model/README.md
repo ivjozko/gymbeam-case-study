@@ -3,7 +3,7 @@
 Tento priečinok obsahuje ER diagram, star scheme a SQL schému pre zadanie č. 1 (Data Engineer – GymBeam).
 
 ## ER Diagram
-![ERD](./er_diagram.png).
+![ERD](./er_diagram.png)
 
 # Star schema – analytický model predaja
 
