@@ -33,16 +33,16 @@ CREATE TABLE Orders (
     customer_id INT,
     order_date DATE NOT NULL,
     status VARCHAR(50),
+    order_item_id INT,
     FOREIGN KEY (customer_id) REFERENCES Customer(customer_id)
+    FOREIGN KEY (order_item_id) REFERENCES OrderItem(order_item_id)
 );
 
 CREATE TABLE OrderItem (
     order_item_id INT PRIMARY KEY,
-    order_id INT,
     product_id INT,
     quantity INT NOT NULL,
     unit_price DECIMAL(10, 2) NOT NULL,
-    FOREIGN KEY (order_id) REFERENCES Orders(order_id),
     FOREIGN KEY (product_id) REFERENCES Product(product_id)
 );
 
