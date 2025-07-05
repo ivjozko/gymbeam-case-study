@@ -6,25 +6,25 @@
 -- Vytvorenie očistenej tabuľky s validovanými a skontrolovanými dátami
 CREATE OR REPLACE TABLE clean_csv_input AS
 SELECT
--- Zachovávame pôvodné stĺpce, číselné hodnoty konvertujeme do správneho typu
+		-- Zachovávame pôvodné stĺpce, číselné hodnoty konvertujeme do správneho typu
     TransactionID,
     Category,
     Product,
     TransactionDate,
-    SAFE_CAST(Quantity AS INT64) as Quantity,			-- Prevádza Quantity na celé číslo
-    SAFE_CAST(Price AS FLOAT64) as Price,			-- Prevádza Price na desatinné číslo
-    SAFE_CAST(TotalValue AS FLOAT64) as TotalValue,		-- Prevádza TotalValue na desatinné číslo
+    SAFE_CAST(Quantity AS INT64) as Quantity,					-- Prevádza Quantity na celé číslo
+    SAFE_CAST(Price AS FLOAT64) as Price,							-- Prevádza Price na desatinné číslo
+    SAFE_CAST(Quantity AS INT64) * SAFE_CAST(Price AS FLOAT64) AS TotalValue, -- Vypočíta TotalValue z kvantity a ceny
     CustomerID,
     PaymentMethod,
     ShippingAddress,
     Email,
     OrderStatus,
     DiscountCode,
-    SAFE_CAST(PaymentAmount AS FLOAT64) as PaymentAmount,	-- Prevádza PaymentAmount na desatinné číslo
-    _timestamp AS import_timestamp				-- Premenujeme systémový stĺpec, aby bol validný v BigQuery
+   	SAFE_CAST(Quantity AS INT64) * SAFE_CAST(Price AS FLOAT64) AS PaymentAmount,		-- Vypočíta PaymentAmount z kvantity a ceny
+    _timestamp AS import_timestamp													-- Premenujeme systémový stĺpec, aby bol validný v BigQuery
 FROM csv_input
 WHERE
--- Kontrola povinných textových polí (nesmie byť NULL ani prázdny string)
+		-- Kontrola povinných textových polí (nesmie byť NULL ani prázdny string)
     Category IS NOT NULL AND Category != '' 
     AND Product IS NOT NULL AND Product != ''
     AND TransactionDate IS NOT NULL
@@ -39,12 +39,6 @@ WHERE
     AND SAFE_CAST(Quantity AS INT64) >= 1
     AND SAFE_CAST(Price AS FLOAT64) >= 0
     AND SAFE_CAST(TotalValue AS FLOAT64) >= 0
-    
-    -- Doplňujúce biznis pravidlá:
-    -- 1. TotalValue musí byť presne Quantity * Price
-    -- 2. TotalValue musí byť presne rovné PaymentAmount
-    AND SAFE_CAST(TotalValue AS FLOAT64) = SAFE_CAST(Quantity AS INT64) * SAFE_CAST(Price AS FLOAT64)
-    AND SAFE_CAST(TotalValue AS FLOAT64) = SAFE_CAST(PaymentAmount AS FLOAT64)
     AND SAFE_CAST(PaymentAmount AS FLOAT64) >= 0
     
     -- Kontrola formátu emailu
@@ -53,5 +47,8 @@ WHERE
     -- Kontrola dátumu (platný formát a nesmie byť v budúcnosti)
     AND SAFE.PARSE_DATE('%Y-%m-%d', TransactionDate) IS NOT NULL
     AND SAFE.PARSE_DATE('%Y-%m-%d', TransactionDate) <= CURRENT_DATE()
+   
+
+
    
 
